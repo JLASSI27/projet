@@ -8,19 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ServiceReservation implements IService <Seance> {
+public class ServiceReservation implements IService <Reservation> {
     Connection con= Datasource.getInstance().getCon();
 
     @Override
-    public void ajouter(Seance x) throws SQLException {
-        String req = "insert into reservation values(?,?,?,?)";
-        PreparedStatement ps = con.prepareStatement(req);
-        ps.setInt(1, x.getIdS());
+    public void ajouter(Reservation reservation) throws SQLException {
+
+
 
      }
 
     @Override
-    public void modifier(Seance x) throws SQLException {
+    public void modifier(Reservation reservation) throws SQLException {
 
 
 
@@ -32,12 +31,12 @@ public class ServiceReservation implements IService <Seance> {
     }
 
     @Override
-    public Seance getOneById(int id) throws SQLException {
+    public Reservation  getOneById(int id) throws SQLException {
         return null;
     }
 
     @Override
-    public List<Seance> getAll() throws SQLException {
+    public List<Reservation> getAll() throws SQLException {
         return List.of();
     }
 }
