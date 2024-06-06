@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class Datasource {
     private Connection con;
-    private String url="jdbc:mysql://localhost:3306/salle_sport";
+    private String url="jdbc:mysql://localhost:3306/sallesport";
     private String login="root";
     private String pws="";
 
