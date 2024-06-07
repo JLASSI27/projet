@@ -1,6 +1,7 @@
-package service;
+package services;
 import entite.Plat;
-import utile.*;
+import util.Datasource;
+import util.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
