@@ -1,9 +1,9 @@
 package services;
 
+import entities.Utilisateur;
 import util.Datasource;
 import entities.Evenement;
 import entities.Participation;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,15 +24,15 @@ public class ServiceParticipation implements IService<Participation>{
     @Override
     public void ajouter(Participation p) throws SQLException{
 
-        String req = "INSERT INTO `participation`( `nom_p`,`prenom_p`, `age`,`email` , `idf_event` , `id_User`) VALUES (?,?,?,?,?,?)";
+        String req = "INSERT INTO `participation`( `nom_p`,`prenom_p`, `age`,`email` , `id_p` , `id_Utilisateur`) VALUES (?,?,?,?,?,?)";
 
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1,p.getNom_p());
         ps.setString(2,p.getPrenom_p());
         ps.setInt(3,p.getAge());
         ps.setString(4,p.getEmail());
-        //ps.setInt(5,p.getIdEv().getId_eve());
-        //ps.setInt(6,p.getUser().getId());
+        ps.setInt(5,p.getEvent().getIdEv());
+        ps.setInt(6,p.getUtilisateur().getIdU());
         ps.executeUpdate();
         System.out.println("participation added !");
 
@@ -48,7 +48,7 @@ public class ServiceParticipation implements IService<Participation>{
         ps.setString(2,p.getPrenom_p());
         ps.setInt(3,p.getAge());
         ps.setString(4,p.getEmail());
-        // ps.setInt(5,p.getIdEv().getId_eve());
+        ps.setInt(5,p.getEvent().getIdEv());
         ps.setInt(6, p.getId_p()); // Spécification de l'ID de participation à modifier
 
         ps.executeUpdate();
@@ -56,11 +56,11 @@ public class ServiceParticipation implements IService<Participation>{
     }
 
     @Override
-    public void supprimer(int id_eve) {
+    public void supprimer(int IdEv) {
         String sql = "delete from participation where id_p = ?";
         try {
             PreparedStatement preparedStatement = cnx.prepareStatement(sql);
-            preparedStatement.setInt(1, id_eve);
+            preparedStatement.setInt(1, IdEv);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -76,19 +76,18 @@ public class ServiceParticipation implements IService<Participation>{
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ServiceEvenement se = new ServiceEvenement();
-                //UserService user = new UserService();
+                Services.UtilisateurService utilisateur = new Services.UtilisateurService();
 
                 Evenement e = se.getOneById(rs.getInt("idf_event"));
-                //User us = user.getOneByEmail();
+                Utilisateur us = utilisateur.getOneByEmail();
                 participation = new Participation(
                         rs.getString("nom_p"),
                         rs.getString("prenom_p"),
                         rs.getInt("age"),
                         rs.getString("email"),
-                        e,
-                        // us
-                );
-                participation.setid_p(rs.getInt("id_p"));
+                        e;
+
+                participation.getId_p(rs.getInt("Id_p"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -121,7 +120,7 @@ public class ServiceParticipation implements IService<Participation>{
                     //  user
 
             );
-            participation.setId_p(rs.getInt("id_p"));
+            participation.getId_p(rs.getInt("Id_p"));
             participations.add(participation);
         }
 
