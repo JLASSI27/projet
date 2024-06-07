@@ -12,7 +12,7 @@ public class Participation {
     private Utilisateur utilisateur;
     private Evenement event;
 
-    public Participation() {
+    public Participation(String nomP, String prenomP, int age, String email, Evenement e, Utilisateur utilisateur) {
     }
 
     public Participation(int id_p, String nom_p, String prenom_p, int age, String email) {
@@ -25,7 +25,7 @@ public class Participation {
         this.event = event;
     }
 
-    public int getId_p() {
+    public int getId_p(int idP) {
         return id_p;
     }
 
@@ -100,6 +100,7 @@ public class Participation {
     public int hashCode() {
         return Objects.hash(id_p, nom_p, prenom_p, age, email, utilisateur, event);
     }
+
 }
 
 
