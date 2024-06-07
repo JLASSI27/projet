@@ -25,7 +25,7 @@ public class Participation {
         this.event = event;
     }
 
-    public int getId_p(int idP) {
+    public int getId_p() {
         return id_p;
     }
 
