@@ -1,4 +1,4 @@
-package entite;
+package entities;
 
 public class Categorieplat {
     private int idC;
@@ -59,7 +59,7 @@ public class Categorieplat {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Plat plat = (Plat) o;
+        entities.Plat plat = (Plat) o;
         return idC == plat.getIdP();
     }
 
