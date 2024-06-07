@@ -1,13 +1,14 @@
-package service;
+package services;
 
 import entite.AvisPlat;
-import utile.Datasource;
+import services.IService;
+import util.Datasource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ServicesAvisPlat implements IService<AvisPlat>{
+public class ServicesAvisPlat implements IService<AvisPlat> {
     private Connection cnx;
 
   public ServicesAvisPlat(){
