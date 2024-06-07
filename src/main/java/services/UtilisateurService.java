@@ -1,7 +1,7 @@
-package Services;
+package services;
 
-import util.DataSource;
-import org.example.Utilisateur;
+import entities.Utilisateur;
+import util.Datasource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +12,13 @@ import java.util.List;
 
 public class UtilisateurService {
     Connection connection;
+
     public UtilisateurService() {
-         connection = DataSource.getInstance().getConnexion();
+        connection = Datasource.getInstance().getCon();
+    }
+
+    public static Utilisateur getOneById(int idU) {
+        return null;
     }
 
     // Ajouter un utilisateur
@@ -36,7 +41,7 @@ public class UtilisateurService {
     public void supprimer(int id) {
         String query = "DELETE FROM utilisateur WHERE idU = ?";
         try (
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -53,7 +58,7 @@ public class UtilisateurService {
     public Utilisateur consulter(int id) {
         String query = "SELECT * FROM utilisateur WHERE idU = ?";
         try (
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -81,7 +86,7 @@ public class UtilisateurService {
         List<Utilisateur> utilisateurs = new ArrayList<>();
         String query = "SELECT * FROM utilisateur WHERE nomU LIKE ?";
         try (
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + nom + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -108,8 +113,8 @@ public class UtilisateurService {
         List<Utilisateur> utilisateurs = new ArrayList<>();
         String query = "SELECT * FROM utilisateur ORDER BY nomU";
         try (
-             PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 Utilisateur utilisateur = new Utilisateur();
                 utilisateur.setIdU(resultSet.getInt("idU"));
@@ -132,7 +137,7 @@ public class UtilisateurService {
     public boolean verifId(int id) {
         String query = "SELECT 1 FROM utilisateur WHERE idU = ?";
         try (
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next();
@@ -146,7 +151,7 @@ public class UtilisateurService {
     public void oublierMdp(int id, String nouveauMdp) {
         String query = "UPDATE utilisateur SET mdp = ? WHERE idU = ?";
         try (
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, nouveauMdp);
             preparedStatement.setInt(2, id);
             int rowsAffected = preparedStatement.executeUpdate();
@@ -179,5 +184,9 @@ public class UtilisateurService {
                 System.out.println("Aucun utilisateur trouvé avec l'ID : " + id);
             }
         }
+    }
+
+    public Utilisateur getOneByEmail() {
+        return null;
     }
 }
