@@ -12,13 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceParticipation implements IService<Participation>{
-
-    //SessionManagement ss=new SessionManagement();
-    //String mail=ss.getEmail;
-    //UserService us=new UserService();
-    //User u =us.getOneByEmail(mail);
-
-
+    
     Connection cnx = Datasource.getInstance().getCon();
 
     @Override
