@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceParticipation implements IService<Participation>{
-    
+
     Connection cnx = Datasource.getInstance().getCon();
 
     @Override
@@ -81,7 +81,7 @@ public class ServiceParticipation implements IService<Participation>{
                         rs.getString("email"),
                         e,us);
 
-                participation.getId_p(rs.getInt("Id_p"));
+                participation.getId_p();
 
             }
         } catch (SQLException e) {
@@ -111,7 +111,7 @@ public class ServiceParticipation implements IService<Participation>{
                     rs.getInt("age"),
                     rs.getString("email"),
                     e,utilisateur);
-            participation.getId_p(rs.getInt("Id_p"));
+            participation.getId_p();
             participations.add(participation);
         }
 
