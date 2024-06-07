@@ -1,6 +1,6 @@
 package services;
 
-import util.DataSource;
+import util.Datasource;
 import entities.Evenement;
 import entities.Type;
 
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceEvenement implements IService<Evenement> {
-    Connection cnx ;
+    Connection cnx;
 
     public ServiceEvenement() {
-        cnx=DataSource.getInstance().getCnx();
+        cnx = Datasource.getInstance().getCon();
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ServiceEvenement implements IService<Evenement> {
             ps.setInt(1, idEv);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Type t =  Type.valueOf(rs.getString("Type"));
+                Type t = Type.valueOf(rs.getString("Type"));
                 evenement = new Evenement(
                         rs.getInt("IdEV"),
                         rs.getDate("dateD"),
@@ -110,7 +110,7 @@ public class ServiceEvenement implements IService<Evenement> {
             int nbMax = res.getInt(5);
             String Lieux = res.getString(6);
             String image_eve = res.getString(7);
-            Evenement evenement = new Evenement(idEV,DateD, nbMax,Lieux,Type,image_eve);
+            Evenement evenement = new Evenement(idEV, DateD, nbMax, Lieux, Type, image_eve);
             evenements.add(evenement);
         }
         return evenements;
@@ -130,10 +130,11 @@ public class ServiceEvenement implements IService<Evenement> {
                 int nbMax = resultSet.getInt("nbMax");
                 String lieux = resultSet.getString("Lieux");
                 String image_eve = resultSet.getString("image_eve");
-                return new Evenement(Id,DateD,nbMax,lieux,Type,image_eve);
+                return new Evenement(Id, DateD, nbMax, lieux, Type, image_eve);
             }
         }
         return null; // Si aucun événement trouvé avec le nom donné
     }
+}
 
 
