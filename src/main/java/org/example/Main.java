@@ -1,17 +1,30 @@
 package org.example;
 
-import entities.Seance;
 import util.Datasource;
-import java.util.Date;
-import java.sql.Connection;
+import entities.Evenement;
+import entities.Type;
+import services.ServiceEvenement;
 
 import java.sql.SQLException;
+import java.util.Date;
 
-
-
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws SQLException {
+        ServiceEvenement se = new ServiceEvenement();
+        Date date =new Date();
+        Date date2 =new Date();
+        Evenement e = new Evenement(date, date2, 3,"", Type.TENNIS,"");
+        try {
+            se.ajouter(e);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
 
 
+
+
+        // DataSource d = DataSource.getInstance();
     }
 }
