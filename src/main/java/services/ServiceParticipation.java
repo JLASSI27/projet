@@ -1,8 +1,6 @@
 package services;
 
-package services;
-
-import Utiles.DataSource;
+import util.Datasource;
 import entities.Evenement;
 import entities.Participation;
 
@@ -22,7 +20,7 @@ public class ServiceParticipation implements IService<Participation>{
     //User u =us.getOneByEmail(mail);
 
 
-    Connection cnx = DataSource.getInstance().getCnx();
+    Connection cnx = Datasource.getInstance().getCon();
     @Override
     public void ajouter(Participation p) throws SQLException{
 
