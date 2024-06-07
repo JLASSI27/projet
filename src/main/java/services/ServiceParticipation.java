@@ -9,9 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 public class ServiceParticipation implements IService<Participation>{
 
     //SessionManagement ss=new SessionManagement();
@@ -21,6 +20,7 @@ public class ServiceParticipation implements IService<Participation>{
 
 
     Connection cnx = Datasource.getInstance().getCon();
+
     @Override
     public void ajouter(Participation p) throws SQLException{
 
@@ -76,7 +76,7 @@ public class ServiceParticipation implements IService<Participation>{
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ServiceEvenement se = new ServiceEvenement();
-                Services.UtilisateurService utilisateur = new Services.UtilisateurService();
+                services.UtilisateurService utilisateur = new services.UtilisateurService();
 
                 Evenement e = se.getOneById(rs.getInt("idf_event"));
                 Utilisateur us = utilisateur.getOneByEmail();
@@ -85,15 +85,15 @@ public class ServiceParticipation implements IService<Participation>{
                         rs.getString("prenom_p"),
                         rs.getInt("age"),
                         rs.getString("email"),
-                        e;
+                        e,us);
 
                 participation.getId_p(rs.getInt("Id_p"));
+
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return participation;
-        return null;
     }
 
     @Override
@@ -109,17 +109,14 @@ public class ServiceParticipation implements IService<Participation>{
             //UserService userService = new UserService();
 
             Evenement e = se.getOneById(rs.getInt("idf_event"));
-            // User user = userService.getOneById(rs.getInt("id_User"));
+            Utilisateur utilisateur = UtilisateurService.getOneById(rs.getInt("id_User"));
 
             Participation participation = new Participation(
                     rs.getString("nom_p"),
                     rs.getString("prenom_p"),
                     rs.getInt("age"),
                     rs.getString("email"),
-                    e,
-                    //  user
-
-            );
+                    e,utilisateur);
             participation.getId_p(rs.getInt("Id_p"));
             participations.add(participation);
         }
