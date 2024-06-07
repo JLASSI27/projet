@@ -9,7 +9,8 @@ public class Participation {
     private String prenom_p;
     private int age;
     private String email;
-    //  private User user;
+    private Utilisateur utilisateur;
+    private Evenement event;
 
     public Participation() {
     }
@@ -20,7 +21,8 @@ public class Participation {
         this.prenom_p = prenom_p;
         this.age = age;
         this.email = email;
-        // this.user = user;
+        this.utilisateur = utilisateur;
+        this.event = event;
     }
 
     public int getId_p() {
@@ -42,6 +44,13 @@ public class Participation {
     public String getEmail() {
         return email;
     }
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+    public Evenement getEvent() {
+        return event;
+    }
+
 
     public void setNom_p(String nom_p) {
         this.nom_p = nom_p;
@@ -58,6 +67,12 @@ public class Participation {
     public void setEmail(String email) {
         this.email = email;
     }
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+    public void setEvent(Evenement event) {
+        this.event = event;
+    }
 
 
     @Override
@@ -68,7 +83,8 @@ public class Participation {
                 ", prenom_p='" + prenom_p + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
-                //", user=" + user +
+                ", utilisateur=" + utilisateur +
+                ", event=" + event +
                 '}';
     }
 
@@ -77,12 +93,12 @@ public class Participation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Participation that = (Participation) o;
-        return id_p == that.id_p && age == that.age && Objects.equals(nom_p, that.nom_p) && Objects.equals(prenom_p, that.prenom_p) && Objects.equals(email, that.email) ;
+        return id_p == that.id_p && age == that.age && Objects.equals(nom_p, that.nom_p) && Objects.equals(prenom_p, that.prenom_p) && Objects.equals(email, that.email) && Objects.equals(utilisateur, that.utilisateur) && Objects.equals(event, that.event);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_p, nom_p, prenom_p, age, email);
+        return Objects.hash(id_p, nom_p, prenom_p, age, email, utilisateur, event);
     }
 }
 
