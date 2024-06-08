@@ -24,6 +24,19 @@ public class Main {
             nouvelUtilisateur.setTel(1234567890);
             nouvelUtilisateur.setStatut(true);
             nouvelUtilisateur.setDateNaissance(new Date());
+=======
+
+public static void main(String[] args) throws SQLException {
+    ServicesAvisPlat se = new ServicesAvisPlat();!
+    Date date =new Date();
+    Date date2 =new Date();
+    Evenement e = new Evenement(date, date2, 3,"", Type.TENNIS,"");
+    try {
+        se.ajouter(e);
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+>>>>>>> Stashed changes
 
             // Ajout de l'utilisateur
             utilisateurService.ajouter(connection, nouvelUtilisateur);
