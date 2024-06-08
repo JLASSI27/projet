@@ -1,7 +1,8 @@
-package Services;
+package services;
 
-import util.DataSource;
+import util.Datasource;
 import org.example.Utilisateur;
+import util.Datasource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.util.List;
 public class UtilisateurService {
     Connection connection;
     public UtilisateurService() {
-         connection = DataSource.getInstance().getConnexion();
+         connection = Datasource.getInstance().getCon();
     }
 
     // Ajouter un utilisateur
