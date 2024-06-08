@@ -1,6 +1,7 @@
 package services;
 
-import entite.AvisPlat;
+import entities.AvisPlat;
+import entities.AvisPlat;
 import services.IService;
 import util.Datasource;
 import util.Datasource;
