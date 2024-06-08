@@ -8,7 +8,12 @@ import java.util.List;
 
 import static services.IService.con;
 
-public class ServiceCategorieplat implements services.Categorieplat {
+public class ServiceCategorieplat implements IService<Categorieplat> {
+    @Override
+    public void ajouter(Categorieplat x) throws SQLException {
+
+    }
+@Override
     public void modifier(Categorieplat x) throws SQLException {
         String req = "UPDATE Categorieplat SET nomC = ?, descC= ?, etatC = ?  WHERE idC = ?";
         PreparedStatement ps = con.prepareStatement(req);
