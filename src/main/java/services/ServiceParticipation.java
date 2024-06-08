@@ -13,12 +13,16 @@ import java.util.List;
 
 public class ServiceParticipation implements IService<Participation>{
 
-    Connection cnx = Datasource.getInstance().getCon();
+    Connection cnx ;
+
+    public ServiceParticipation() {
+        cnx= Datasource.getInstance().getCon();
+    }
 
     @Override
     public void ajouter(Participation p) throws SQLException{
 
-        String req = "INSERT INTO `participation`( `nom_p`,`prenom_p`, `age`,`email` , `id_p` , `id_Utilisateur`) VALUES (?,?,?,?,?,?)";
+        String req = "INSERT INTO `participation`( `nom_p`,`prenom_p`, `age`,`email` , `id_p` , `idU`) VALUES (?,?,?,?,?,?)";
 
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1,p.getNom_p());
@@ -63,31 +67,30 @@ public class ServiceParticipation implements IService<Participation>{
 
     @Override
     public Participation getOneById(int id_p) {
-        String req = "SELECT * FROM participation WHERE id_p = ?";
-        Participation participation = null;
+        Participation p = null;
+        String req = "SELECT * FROM participation p " +
+                "INNER JOIN evenement e on p.idEv = e.idEv " +
+                "INNER JOIN utilisateur u on p.idU = u.idU" +
+                "where id_p = ?";
+
         try (PreparedStatement ps = cnx.prepareStatement(req)) {
             ps.setInt(1, id_p);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                ServiceEvenement se = new ServiceEvenement();
-                services.UtilisateurService utilisateur = new services.UtilisateurService();
-
-                Evenement e = se.getOneById(rs.getInt("idf_event"));
-                Utilisateur us = utilisateur.getOneByEmail();
-                participation = new Participation(
+                Utilisateur u = rs.getObject(5, Utilisateur.class);
+                Evenement e = rs.getObject(6, Evenement.class);
+                p = new Participation(
                         rs.getString("nom_p"),
                         rs.getString("prenom_p"),
                         rs.getInt("age"),
                         rs.getString("email"),
-                        e,us);
-
-                participation.getId_p();
-
+                        e,u
+                        );
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return participation;
+        return p;
     }
 
     @Override
