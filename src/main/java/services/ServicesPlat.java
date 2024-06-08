@@ -1,5 +1,5 @@
 package services;
-import entite.Plat;
+import entities.Plat;
 import services.IService;
 import entities.*;
 import util.Datasource;
@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ServicesPlat implements IService<entite.Plat> {
+public class ServicesPlat implements IService<Plat> {
 
 
     Connection cnx = Datasource.getInstance().getCon();
