@@ -20,10 +20,13 @@ public class AvisPlat{
             this.idPlat = idPlat;
           //  this.idU = idU;
         }
-       
-        
 
-        // Getters and setters
+    public AvisPlat() {
+        
+    }
+
+
+    // Getters and setters
         public int getIdAP() {
             return idAP;
         }
@@ -81,6 +84,27 @@ public class AvisPlat{
 
     public Thread getIdPlat() {
         return null;
+    }
+
+    public void setNomP(String platDeTest) {
+    }
+
+    public void setAlergieP(String arachides) {
+    }
+
+    public void setPrixP(float v) {
+    }
+
+    public void setDescP(String descriptionDuPlatDeTest) {
+    }
+
+    public void setEtatP(boolean b) {
+    }
+
+    public void setCalories(int i) {
+    }
+
+    public void setRate(float v) {
     }
 }
 
