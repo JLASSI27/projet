@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class AbonnementService {
@@ -113,8 +114,21 @@ public class AbonnementService {
 
     // Rappel automatique
     public void rappelAutomatique() {
-        // Logique de rappel automatique des abonnements (e.g., envoi d'email)
-        System.out.println("Rappel automatique exécuté : Votre abonnement arrive à expiration. Pensez à le renouveler !");
+        String query = "SELECT * FROM abonnement WHERE dateExpiration = CURRENT_DATE";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String message = "Votre abonnement arrive à expiration aujourd'hui. Pensez à le renouveler !";
+                afficherMessage(message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void afficherMessage(String message) {
+        // Logique pour afficher le message dans l'interface utilisateur
+        System.out.println(message);
     }
 
     // Paiement abonnement
