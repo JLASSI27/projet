@@ -2,6 +2,9 @@ package org.example;
 
 import Services.AbonnementService;
 import Services.UtilisateurService;
+import entities.AvisPlat;
+import entities.Plat;
+import services.ServicesAvisPlat;
 import util.DataSource;
 
 import java.sql.Connection;
@@ -109,5 +112,45 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        try {
+            ServicesAvisPlat platService = getServicesAvisPlat();
+
+            // Supprimer un plat
+            platService.supprimer(1);
+
+            // Récupérer un plat par ID
+            Plat platById = platService.getOneById(1).getPlat();
+
+            // Récupérer tous les plats
+            List<AvisPlat> tousLesPlats = platService.getAll();
+
+        } catch (SQLException e) {
+            System.out.println("Erreur de base de données : " + e.getMessage());
+        }
+    }
+
+    private static ServicesAvisPlat getServicesAvisPlat() throws SQLException {
+        false > 'platService = new ServicesPlat<>();
+
+        // Créer un nouveau plat
+        AvisPlat plat = new AvisPlat();
+        plat.setNomP("Plat de test");
+        plat.setPrixP(10.99F);
+        plat.setDescP("Description du plat de test");
+        plat.setAlergieP("Arachides");
+        plat.setEtatP(true);
+        plat.setRate(4.5F);
+        plat.setCalories(500);
+        ServicesAvisPlat platService = null;
+        platService.ajouter(plat);
+
+        // Modifier un Avisplat
+        plat.setNomP("Nouveau nom du plat");
+        plat.setPrixP(12.99F);
+        platService.modifier(plat);
+        return platService;
     }
 }
