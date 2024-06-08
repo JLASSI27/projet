@@ -13,15 +13,21 @@ public class Participation {
     private Evenement event;
 
     public Participation(String nomP, String prenomP, int age, String email, Evenement e, Utilisateur utilisateur) {
+        this.nom_p = nomP;
+        this.prenom_p = prenomP;
+        this.age = age;
+        this.email = email;
+        this.utilisateur = utilisateur;
+        this.event = e;
     }
 
-    public Participation(int id_p, String nom_p, String prenom_p, int age, String email) {
+    public Participation(int id_p, String nom_p, String prenom_p, int age, String email,Utilisateur user,Evenement event) {
         this.id_p = id_p;
         this.nom_p = nom_p;
         this.prenom_p = prenom_p;
         this.age = age;
         this.email = email;
-        this.utilisateur = utilisateur;
+        this.utilisateur = user;
         this.event = event;
     }
 
