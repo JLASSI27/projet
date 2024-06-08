@@ -1,4 +1,4 @@
-package entite;
+package entities;
 
 public class Plat {
     private int idP;
@@ -138,6 +138,14 @@ public class Plat {
     @Override
     public int hashCode() {
         return idP;
+    }
+
+    public float getRate() {
+        return 0;
+    }
+
+    public int getIdp() {
+        return 0;
     }
 }
 
