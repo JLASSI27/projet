@@ -8,11 +8,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         UtilisateurService utilisateurService = new UtilisateurService();
-        AbonnementService abonnementService = new AbonnementService();
+        AbonnementService abonnementService = new AbonnementService(); // Create an instance of AbonnementService
+        Scanner scanner = new Scanner(System.in);
 
         try (Connection connection = DataSource.getInstance().getConnexion()) {
             // Création d'un nouvel utilisateur
@@ -27,18 +29,27 @@ public class Main {
 
             // Ajout de l'utilisateur
             utilisateurService.ajouter(connection, nouvelUtilisateur);
+            int nouvelUtilisateurId = nouvelUtilisateur.getIdU();
+            System.out.println("Nouvel utilisateur ajouté avec ID : " + nouvelUtilisateurId);
 
-            // Suppression de l'utilisateur
-            utilisateurService.supprimer(1);
+            // Demander l'ID de l'utilisateur à supprimer
+            System.out.print("Entrez l'ID de l'utilisateur à supprimer : ");
+            int idUtilisateurASupprimer = scanner.nextInt();
+            utilisateurService.supprimer(idUtilisateurASupprimer);
 
-            // Consultation de l'utilisateur
-            org.example.Utilisateur utilisateur = utilisateurService.consulter(2);
+            // Demander l'ID de l'utilisateur à consulter
+            System.out.print("Entrez l'ID de l'utilisateur à consulter : ");
+            int idUtilisateurAConsulter = scanner.nextInt();
+            org.example.Utilisateur utilisateur = utilisateurService.consulter(idUtilisateurAConsulter);
             if (utilisateur != null) {
                 System.out.println("Utilisateur consulté : " + utilisateur.getNomU());
             }
 
             // Recherche des utilisateurs par nom
-            List<org.example.Utilisateur> utilisateursTrouves = utilisateurService.rechercher("John");
+            System.out.print("Entrez le nom de l'utilisateur à rechercher : ");
+            scanner.nextLine(); // Consuming newline left-over
+            String nomRecherche = scanner.nextLine();
+            List<org.example.Utilisateur> utilisateursTrouves = utilisateurService.rechercher(nomRecherche);
             System.out.println("Utilisateurs trouvés sous nom tapé : " + utilisateursTrouves.size());
 
             // Tri des utilisateurs par nom
@@ -46,14 +57,22 @@ public class Main {
             System.out.println("Utilisateurs triés : " + utilisateursTries.size());
 
             // Vérification de l'ID
-            boolean idExiste = utilisateurService.verifId(2);
+            System.out.print("Entrez l'ID à vérifier : ");
+            int idAVerifier = scanner.nextInt();
+            boolean idExiste = utilisateurService.verifId(idAVerifier);
             System.out.println("ID existe : " + idExiste);
 
             // Mettre à jour le mot de passe
-            utilisateurService.oublierMdp(3, "7856697");
+            System.out.print("Entrez l'ID de l'utilisateur pour réinitialiser le mot de passe : ");
+            int idUtilisateurMdp = scanner.nextInt();
+            System.out.print("Entrez le nouveau mot de passe : ");
+            scanner.nextLine(); // Consuming newline left-over
+            String nouveauMdp = scanner.nextLine();
+            utilisateurService.oublierMdp(idUtilisateurMdp, nouveauMdp);
 
             // Modification de l'utilisateur
-            int idUtilisateurAModifier = 4; // Remplacez 4 par l'ID de l'utilisateur que vous souhaitez modifier
+            System.out.print("Entrez l'ID de l'utilisateur à modifier : ");
+            int idUtilisateurAModifier = scanner.nextInt();
             org.example.Utilisateur utilisateurModifie = new org.example.Utilisateur();
             utilisateurModifie.setNomU("Malek");
             utilisateurModifie.setPrenomU("Benkacem");
@@ -66,48 +85,62 @@ public class Main {
             utilisateurService.modifier(connection, idUtilisateurAModifier, utilisateurModifie);
 
             // Ajout d'un nouvel abonnement
-            Abonnement newAbonnement = new Abonnement();
+            org.example.Abonnement newAbonnement = new org.example.Abonnement();
             newAbonnement.setMontant(100.0f);
-            newAbonnement.setDateExpiration(new Date()); // Utilisez dateExpiration au lieu de dateExpedition
+            newAbonnement.setDateExpiration(new Date());
             newAbonnement.setCodePromo("PROMO2023");
             newAbonnement.setTypeAbonnement("Premium");
-            newAbonnement.setIdU(nouvelUtilisateur.getIdU());
+            newAbonnement.setIdU(nouvelUtilisateurId);
 
             abonnementService.ajouterS(newAbonnement);
+            int newAbonnementId = newAbonnement.getIdA();
+            System.out.println("Nouvel abonnement ajouté avec ID : " + newAbonnementId);
 
             // Modifier un abonnement
-            Abonnement modifiedAbonnement = new Abonnement();
+            System.out.print("Entrez l'ID de l'abonnement à modifier : ");
+            int idAbonnementAModifier = scanner.nextInt();
+            org.example.Abonnement modifiedAbonnement = new org.example.Abonnement();
             modifiedAbonnement.setMontant(200.0f);
-            modifiedAbonnement.setDateExpiration(new Date()); // Utilisez dateExpiration au lieu de dateExpedition
+            modifiedAbonnement.setDateExpiration(new Date());
             modifiedAbonnement.setCodePromo("PROMO2024");
             modifiedAbonnement.setTypeAbonnement("Gold");
-            modifiedAbonnement.setIdU(nouvelUtilisateur.getIdU());
+            modifiedAbonnement.setIdU(nouvelUtilisateurId);
 
-            abonnementService.modifierS(newAbonnement.getIdA(), modifiedAbonnement);
+            abonnementService.modifierS(idAbonnementAModifier, modifiedAbonnement);
 
             // Consulter un abonnement
-            Abonnement abonnement = abonnementService.consulter(newAbonnement.getIdA());
+            System.out.print("Entrez l'ID de l'abonnement à consulter : ");
+            int idAbonnementAConsulter = scanner.nextInt();
+            org.example.Abonnement abonnement = abonnementService.consulter(idAbonnementAConsulter);
             if (abonnement != null) {
                 System.out.println("Abonnement consulté : " + abonnement.getTypeAbonnement());
             }
 
             // Supprimer un abonnement
-            abonnementService.supprimerS(newAbonnement.getIdA());
+            System.out.print("Entrez l'ID de l'abonnement à supprimer : ");
+            int idAbonnementASupprimer = scanner.nextInt();
+            abonnementService.supprimerS(idAbonnementASupprimer);
 
             // Abonnement personnalisé
-            abonnementService.abonnementPersonnalise(newAbonnement.getIdA(), "NEWPROMO2024");
+            System.out.print("Entrez l'ID de l'abonnement à personnaliser : ");
+            int idAbonnementPersonnalise = scanner.nextInt();
+            System.out.print("Entrez le nouveau code promo : ");
+            scanner.nextLine(); // Consuming newline left-over
+            String newCodePromo = scanner.nextLine();
+            abonnementService.abonnementPersonnalise(idAbonnementPersonnalise, newCodePromo);
 
             // Rappel automatique
             abonnementService.rappelAutomatique();
 
             // Paiement abonnement
-            abonnementService.paiementAbonnement(newAbonnement.getIdA());
-
-            // Notification abonnement
-            abonnementService.notificationAbonnement(newAbonnement.getIdA());
+            System.out.print("Entrez l'ID de l'abonnement pour effectuer le paiement : ");
+            int idAbonnementPaiement = scanner.nextInt();
+            abonnementService.paiementAbonnement(idAbonnementPaiement);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            scanner.close();
         }
     }
 }
