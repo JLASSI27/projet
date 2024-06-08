@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
 
 public class AbonnementService {
     Connection connection;
@@ -18,14 +20,20 @@ public class AbonnementService {
     // Ajouter un abonnement
     public void ajouterS(Abonnement abonnement) throws SQLException {
         String query = "INSERT INTO abonnement (montant, dateExpiration, codePromo, typeAbonnement, idU) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setFloat(1, abonnement.getMontant());
             preparedStatement.setDate(2, new java.sql.Date(abonnement.getDateExpiration().getTime()));
             preparedStatement.setString(3, abonnement.getCodePromo());
             preparedStatement.setString(4, abonnement.getTypeAbonnement());
             preparedStatement.setInt(5, abonnement.getIdU());
             preparedStatement.executeUpdate();
-            System.out.println("Abonnement ajouté : " + abonnement.getIdA());
+
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                abonnement.setIdA(generatedKeys.getInt(1));
+            } else {
+                throw new SQLException("Creating abonnement failed, no ID obtained.");
+            }
         }
     }
 
@@ -111,4 +119,21 @@ public class AbonnementService {
 
     // Paiement abonnement
     public void paiementAbonnement(int id) throws SQLException {
-        // Logique de paiement de l'abonnement (e.g., via une API de paiement)
+        Scanner scanner = new Scanner(System.in);
+
+        // Afficher un message de confirmation avec l'ID de l'abonnement
+        System.out.println("Voulez-vous vraiment effectuer le paiement de l'abonnement ID " + id + " ? (Oui/Non)");
+
+        // Lire l'entrée de l'utilisateur
+        String reponse = scanner.nextLine();
+
+        // Vérifier si l'utilisateur a confirmé le paiement
+        if (reponse.equalsIgnoreCase("Oui")) {
+            // Logique de paiement de l'abonnement (e.g., via une API de paiement)
+            System.out.println("Paiement de l'abonnement ID " + id + " effectué avec succès !");
+        } else {
+            // Afficher un message si l'utilisateur a annulé le paiement
+            System.out.println("Le paiement de l'abonnement ID " + id + " a été annulé.");
+        }
+    }
+}
