@@ -42,7 +42,9 @@ public class Main {
                 try {
                     // Update the Person in the database
                     Reclamation reclamation = new Reclamation();
-                    reclamation.setIdRec(13); // Spécifiez l'ID de la réclamation à modifier
+                    System.out.print("Enter the id of the rec to update: ");
+                    int id = scanner.nextInt();
+                    reclamation.setIdRec(id); // Spécifiez l'ID de la réclamation à modifier
                     reclamation.setCategorieR("Problème technique"); // Spécifiez la nouvelle catégorie
                     reclamation.setDescription("azerty"); // Spécifiez la nouvelle description
                     reclamation.setIdU(1); // Spécifiez le nouvel utilisateur associé
