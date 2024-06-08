@@ -5,7 +5,7 @@ import java.util.Date;
 public class Abonnement {
     private int idA;
     private float montant;
-    private Date dateExpedition;
+    private Date dateExpiration;
     private String codePromo;
     private String typeAbonnement;
     private int idU;
@@ -27,12 +27,12 @@ public class Abonnement {
         this.montant = montant;
     }
 
-    public Date getDateExpedition() {
-        return dateExpedition;
+    public Date getDateExpiration() {
+        return dateExpiration;
     }
 
-    public void setDateExpedition(Date dateExpedition) {
-        this.dateExpedition = dateExpedition;
+    public void setDateExpiration(Date dateExpiration) {
+        this.dateExpiration = dateExpiration;
     }
 
     public String getCodePromo() {
