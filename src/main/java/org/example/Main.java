@@ -55,7 +55,7 @@ public class Main {
             // Ajout d'une participation
             Evenement evenement = new Evenement(new Date(), new Date(), 3, "lieux", Type.TENNIS, "image");
             Utilisateur user = new Utilisateur();
-            Utilisateur.setIdU(1);
+            user.setIdU(1);
             Participation p =
                    new Participation("Nom", "Prenom", 20, "email@example.com", evenement, user);
             Participation p2 =
