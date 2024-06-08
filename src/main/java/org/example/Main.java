@@ -3,6 +3,7 @@ package org.example;
 import entities.Participation;
 import entities.Utilisateur;
 import services.ServiceParticipation;
+import services.UtilisateurService;
 import util.Datasource;
 import entities.Evenement;
 import entities.Type;
@@ -25,13 +26,13 @@ public class Main {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
 
-            e.setIdEv(1);
-            e.setDateD(new Date());
-            e.setDateF(new Date());
-            e.setType(Type.BODYBUILD);
-            e.setNbMax(100);
-            e.setLieux("Lieu modifié");
-            e.setImage_eve("Image modifiée");
+          e.setIdEv(1);
+          e.setDateD(new Date());
+          e.setDateF(new Date());
+          e.setType(Type.BODYBUILD);
+          e.setNbMax(100);
+          e.setLieux("Lieu modifié");
+          e.setImage_eve("Image modifiée");
 
             try {
                 se.modifier(e);
@@ -54,34 +55,36 @@ public class Main {
             // Ajout d'une participation
             Evenement evenement = new Evenement(new Date(), new Date(), 3, "lieux", Type.TENNIS, "image");
             Utilisateur user = new Utilisateur();
-            user.setIdU(1);
+            Utilisateur.setIdU(1);
             Participation p =
-                    new Participation("Nom", "Prenom", 20, "email@example.com", evenement, user);
+                   new Participation("Nom", "Prenom", 20, "email@example.com", evenement, user);
             Participation p2 =
                     new Participation(2,"Nom", "Prenom", 20, "email@example.com", user, evenement);
             sp.ajouter(p);
             System.out.println("Participation ajoutée !");
 
-            // Récupération de la participation par ID
+            //Récupération de la participation par ID
             Participation participation = sp.getOneById(p2.getId_p());
             System.out.println("Participation récupérée : " + participation.getNom_p());
 
             // Modification de la participation
             participation.setNom_p("Nom modifié");
-           // sp.modifier(participation);
+            sp.modifier(participation);
             System.out.println("Participation modifiée !");
 
             // Suppression de la participation
-           // sp.supprimer(p.getId_p());
+            sp.supprimer(p.getId_p());
             System.out.println("Participation supprimée !");
 
             // Récupération de toutes les participations
             List<Participation> participations = sp.getAll();
-            for (Participation ppp : participations) {
+            for (Participation ppp : participations)
                 System.out.println(p2);
             }
         }
-    }}
+    }
+
+
 
 
 
