@@ -46,17 +46,17 @@ public class ServiceEvenement implements IService<Evenement> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        PreparedStatement preparedStatement = cnx.prepareStatement(req);
-        preparedStatement.setString(1, String.valueOf(eve.getType()));
-        preparedStatement.setDate(2, new Date(eve.getDateD().getTime()));
-        preparedStatement.setDate(3, new Date(eve.getDateF().getTime()));
-        preparedStatement.setInt(4, eve.getNbMax());
-        preparedStatement.setString(5, eve.getLieux());
-        preparedStatement.setString(6, eve.getImage_eve());
-        preparedStatement.setInt(7, eve.getIdEv()); // Spécification de l'ID de l'événement à modifier
+       // PreparedStatement preparedStatement = cnx.prepareStatement(req);
+        //preparedStatement.setString(1, String.valueOf(eve.getType()));
+        //preparedStatement.setDate(2, new Date(eve.getDateD().getTime()));
+        //preparedStatement.setDate(3, new Date(eve.getDateF().getTime()));
+        //preparedStatement.setInt(4, eve.getNbMax());
+        //preparedStatement.setString(5, eve.getLieux());
+        //preparedStatement.setString(6, eve.getImage_eve());
+        //preparedStatement.setInt(7, eve.getIdEv()); // Spécification de l'ID de l'événement à modifier
 
-        preparedStatement.executeUpdate();
-        System.out.println("Evenement updated !");
+       // preparedStatement.executeUpdate();
+      //  System.out.println("Evenement updated !");
     }
 
     @Override
