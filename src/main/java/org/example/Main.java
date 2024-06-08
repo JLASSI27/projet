@@ -1,5 +1,8 @@
 package org.example;
 
+import entities.Participation;
+import entities.Utilisateur;
+import services.ServiceParticipation;
 import util.Datasource;
 import entities.Evenement;
 import entities.Type;
@@ -18,10 +21,10 @@ public class Main {
         Date date2 = new Date();
         Evenement e = new Evenement(date, date2, 3, "", Type.TENNIS, "");
         try {
-            se.ajouter(e);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+        //    se.ajouter(e);
+      //  } catch (SQLException ex) {
+          //  System.out.println(ex.getMessage());
+       // }
         e.setIdEv(1);
         e.setDateD(new Date());
         e.setDateF(new Date());
@@ -51,9 +54,43 @@ public class Main {
             System.out.println("Image : " + ev.getImage_eve());
             System.out.println("---------------");
         }
-    }
+    } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
 
+        ServiceParticipation sp = new ServiceParticipation();
+
+    // Ajout d'une participation
+    Participation p = new Participation("Nom", "Prenom", 20, "email@example.com", new Evenement(new Date(), new Date(), 3, "", Type.TENNIS, "");
+     sp.ajouter(p);
+        System.out.println("Participation ajoutée !");
+
+    // Récupération de la participation par ID
+    Participation participation = sp.getOneById(p.getId_p());
+        System.out.println("Participation récupérée : " + participation.getNom_p());
+
+    // Modification de la participation
+        participation.setNom_p("Nom modifié");
+        sp.modifier(participation);
+        System.out.println("Participation modifiée !");
+
+    // Suppression de la participation
+        sp.supprimer(p.getId_p());
+        System.out.println("Participation supprimée !");
+
+    // Récupération de toutes les participations
+    List<Participation> participations = sp.getAll();
+        for (Participation p2 : participations) {
+        System.out.println("Nom : " + p2.getNom_p());
+        System.out.println("Prénom : " + p2.getPrenom_p());
+        System.out.println("Âge : " + p2.getAge());
+        System.out.println("Email : " + p2.getEmail());
+        System.out.println("---------------");
+    }
 }
+}
+
+
 
 
 
