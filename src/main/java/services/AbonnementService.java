@@ -1,7 +1,8 @@
-package Services;
+package services;
 
-import util.DataSource;
+import util.Datasource;
 import org.example.Abonnement;
+import util.Datasource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ public class AbonnementService {
     Connection connection;
 
     public AbonnementService() {
-        connection = DataSource.getInstance().getConnexion();
+        connection = Datasource.getInstance().getCon();
     }
 
     // Ajouter un abonnement
@@ -20,7 +21,7 @@ public class AbonnementService {
         String query = "INSERT INTO abonnement (montant, dateExpiration, codePromo, typeAbonnement, idU) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setFloat(1, abonnement.getMontant());
-            preparedStatement.setDate(2, new java.sql.Date(abonnement.getDateExpiration().getTime()));
+            preparedStatement.setDate(2, new java.sql.Date(abonnement.getDateExpedition().getTime()));
             preparedStatement.setString(3, abonnement.getCodePromo());
             preparedStatement.setString(4, abonnement.getTypeAbonnement());
             preparedStatement.setInt(5, abonnement.getIdU());
@@ -34,7 +35,7 @@ public class AbonnementService {
         String query = "UPDATE abonnement SET montant = ?, dateExpiration = ?, codePromo = ?, typeAbonnement = ?, idU = ? WHERE idA = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setFloat(1, abonnementModifie.getMontant());
-            preparedStatement.setDate(2, new java.sql.Date(abonnementModifie.getDateExpiration().getTime()));
+            preparedStatement.setDate(2, new java.sql.Date(abonnementModifie.getDateExpedition().getTime()));
             preparedStatement.setString(3, abonnementModifie.getCodePromo());
             preparedStatement.setString(4, abonnementModifie.getTypeAbonnement());
             preparedStatement.setInt(5, abonnementModifie.getIdU());
@@ -74,7 +75,7 @@ public class AbonnementService {
                 Abonnement abonnement = new Abonnement();
                 abonnement.setIdA(resultSet.getInt("idA"));
                 abonnement.setMontant(resultSet.getFloat("montant"));
-                abonnement.setDateExpiration(resultSet.getDate("dateExpiration"));
+                abonnement.setDateExpedition(resultSet.getDate("dateExpiration"));
                 abonnement.setCodePromo(resultSet.getString("codePromo"));
                 abonnement.setTypeAbonnement(resultSet.getString("typeAbonnement"));
                 abonnement.setIdU(resultSet.getInt("idU"));
@@ -112,3 +113,5 @@ public class AbonnementService {
     // Paiement abonnement
     public void paiementAbonnement(int id) throws SQLException {
         // Logique de paiement de l'abonnement (e.g., via une API de paiement)
+    }
+}
