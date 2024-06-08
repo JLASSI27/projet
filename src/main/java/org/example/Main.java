@@ -21,10 +21,18 @@ public class Main {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        e.setDateD(new Date());
+        e.setDateF(new Date());
+        e.setType(Type.BODYBUILD);
+        e.setNbMax(100);
+        e.setLieux("Lieu modifié");
+        e.setImage_eve("Image modifiée");
 
-
-
-
-        // DataSource d = DataSource.getInstance();
+        try {
+            se.modifier(e);
+            System.out.println("Evenement modifié !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
