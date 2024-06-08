@@ -6,9 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import static services.IService.con;
-
-public class ServiceCategorieplat implements services.Categorieplat {
+public abstract class ServiceCategorieplat implements IService<Categorieplat>{
     public void modifier(Categorieplat x) throws SQLException {
         String req = "UPDATE Categorieplat SET nomC = ?, descC= ?, etatC = ?  WHERE idC = ?";
         PreparedStatement ps = con.prepareStatement(req);
@@ -26,22 +24,7 @@ public class ServiceCategorieplat implements services.Categorieplat {
         }
     }
 
-    @Override
-    public void supprimer(int id) throws SQLException {
-        String req = "DELETE FROM Categorieplat WHERE idC = ?";
-
-        PreparedStatement ps = con.prepareStatement(req);
-        int idC = 0;
-        ps.setInt(1, idC);
-
-        int rowsDeleted = ps.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("Categorieplat supprime !");
-        } else {
-            System.out.println("idC incorrect");
-        }
-
-    }
+    public abstract void supprimer(int id) throws SQLException;
 
     @Override
     public Categorieplat getOneById(int idC) throws SQLException {
