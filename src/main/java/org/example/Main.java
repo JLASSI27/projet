@@ -13,9 +13,9 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) throws SQLException {
         ServiceEvenement se = new ServiceEvenement();
-        Date date =new Date();
-        Date date2 =new Date();
-        Evenement e = new Evenement(date, date2, 3,"", Type.TENNIS,"");
+        Date date = new Date();
+        Date date2 = new Date();
+        Evenement e = new Evenement(date, date2, 3, "", Type.TENNIS, "");
         try {
             se.ajouter(e);
         } catch (SQLException ex) {
@@ -35,5 +35,9 @@ public class Main {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+
+        se.supprimer(e.getIdEv());
+        System.out.println("Événement supprimé !");
     }
 }
+
