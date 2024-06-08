@@ -49,6 +49,10 @@ public class Plat {
         this.calories = calories;
     }
 
+    public Plat() {
+        
+    }
+
 
     public int getIdP() {
         return idP;
@@ -146,6 +150,9 @@ public class Plat {
 
     public int getIdp() {
         return 0;
+    }
+
+    public void setRate(float v) {
     }
 }
 
