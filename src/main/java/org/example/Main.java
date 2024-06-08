@@ -21,6 +21,7 @@ public class Main {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        e.setIdEv(1);
         e.setDateD(new Date());
         e.setDateF(new Date());
         e.setType(Type.BODYBUILD);
