@@ -31,7 +31,7 @@ public class ServiceEvenement implements IService<Evenement> {
 
     @Override
     public void modifier(Evenement eve) throws SQLException {
-        String req = "UPDATE evenement SET nom_eve = ?, date_deve = ?, date_feve = ?, nbr_max = ?, adresse_eve = ?, image_eve = ? WHERE id_eve = ?";
+        String req = "UPDATE evenement SET Type = ?, DateD = ?, DateF= ?, nbmax = ?, lieux = ?, image_eve = ? WHERE IdEv = ?";
         try {
             PreparedStatement preparedStatement = cnx.prepareStatement(req);
             preparedStatement.setInt(1, eve.getIdEv()); // Spécification de l'ID de l'événement à modifier
