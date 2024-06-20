@@ -20,15 +20,14 @@ public class Main {
         ServiceEvenement se = new ServiceEvenement();
         Date date = new Date();
         Date date2 = new Date();
-       // Evenement e = new Evenement(Type.TENNIS,11-08-2024, date2, 3, "", "");
-        Evenement evenement = new Evenement("Concert", java.sql.Date.valueOf("2024-07-01"), java.sql.Date.valueOf("2024-07-02"), 100, "Paris", "concert.jpg");
+       Evenement e = new Evenement(date, date2, 3, "", Type.TENNIS, "");
+        //Evenement evenement = new Evenement("Concert", java.sql.Date.valueOf("2024-07-01"), java.sql.Date.valueOf("2024-07-02"), 100, "Paris", "concert.jpg");
 
         try {
-            se.ajouter(evenement);
+            se.ajouter(e);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
           /*e.setIdEv(1);
           e.setDateD(new Date());
           e.setDateF(new Date());
