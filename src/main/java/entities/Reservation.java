@@ -1,13 +1,25 @@
 package entities;
 
+import java.util.Objects;
+
 public class Reservation {
     private int idRs;
     private String name,prenom,email;
+    private sexe sexe;
     private float tel;
-    private enum sexe{HOMME,FEMME};
     static String etat="En cours";
     private int idU;
     private Seance seance;
+    public Reservation(int idRS, String nom, String prenom, String email, float tel, sexe sexe, String etat, int idU){
+    }
+
+
+    public enum sexe{HOMME,FEMME};
+
+
+
+
+
 
     public Reservation(int idRs, String name, String prenom, String email, float tel, int idU, Seance seance) {
         this.idRs = idRs;
@@ -18,6 +30,15 @@ public class Reservation {
         this.idU = idU;
         this.seance = seance;
     }
+
+    public Reservation.sexe getSexe() {
+        return sexe;
+    }
+    public void setSexe(Reservation.sexe sexe) {
+        this.sexe = sexe;
+    }
+
+
 
     public int getIdRs() {
         return idRs;
@@ -55,6 +76,7 @@ public class Reservation {
         return tel;
     }
 
+
     public void setTel(float tel) {
         this.tel = tel;
     }
@@ -82,6 +104,32 @@ public class Reservation {
     public void setSeance(Seance seance) {
         this.seance = seance;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return idRs == that.idRs && Float.compare(tel, that.tel) == 0 && idU == that.idU && Objects.equals(name, that.name) && Objects.equals(prenom, that.prenom) && Objects.equals(email, that.email) && Objects.equals(seance, that.seance);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idRs, name, prenom, email, tel, idU, seance);
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "idRs=" + idRs +
+                ", name='" + name + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", tel=" + tel +
+                ", idU=" + idU +
+                ", seance=" + seance +
+                '}';
+    }
+
+
 }
-
-
