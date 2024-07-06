@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterUtulisateur">
+   <children>
+      <Label layoutX="52.0" layoutY="23.0" text="nom" />
+      <Label layoutX="52.0" layoutY="58.0" text="prenom" />
+      <Label layoutX="52.0" layoutY="91.0" text="mdp" />
+      <Label layoutX="52.0" layoutY="130.0" text="mail" />
+      <Label layoutX="52.0" layoutY="163.0" text="tel" />
+      <Label layoutX="52.0" layoutY="192.0" text="statut" />
+      <Label layoutX="14.0" layoutY="231.0" text="datenaissance" />
+      <TextField fx:id="txtnom" layoutX="98.0" layoutY="19.0" />
+      <TextField fx:id="txtprenom" layoutX="99.0" layoutY="54.0" />
+      <TextField fx:id="txtmdp" layoutX="99.0" layoutY="87.0" />
+      <TextField fx:id="txtmail" layoutX="99.0" layoutY="126.0" />
+      <TextField fx:id="txttel" layoutX="99.0" layoutY="159.0" />
+      <TextField fx:id="txtstatut" layoutX="99.0" layoutY="197.0" />
+      <TextField fx:id="txtdatenaissance" layoutX="99.0" layoutY="227.0" />
+      <Button layoutX="337.0" layoutY="312.0" mnemonicParsing="false" onAction="#adduser" text="Ajouter" />
+   </children>
+</AnchorPane>
