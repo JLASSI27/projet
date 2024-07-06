@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RechercherUtilisateurparnom">
+   <children>
+      <Label layoutX="29.0" layoutY="52.0" prefHeight="18.0" prefWidth="101.0" text="txtnomr" />
+      <TextField fx:id="txtidr" layoutX="208.0" layoutY="49.0" />
+      <Button layoutX="283.0" layoutY="260.0" mnemonicParsing="false" onAction="#searchuser" text="Rechercher" />
+   </children>
+</AnchorPane>
