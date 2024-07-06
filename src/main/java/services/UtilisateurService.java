@@ -1,7 +1,7 @@
 package Services;
 
 import util.DataSource;
-import org.example.Utilisateur;
+import entites.Utilisateur;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -66,6 +66,9 @@ public class UtilisateurService {
                 utilisateur.setTel(resultSet.getLong("tel"));
                 utilisateur.setStatut(resultSet.getBoolean("statut"));
                 utilisateur.setDateNaissance(resultSet.getDate("Date_naissance"));
+
+                // Print nomU and prenomU
+                System.out.println("Nom: " + utilisateur.getNomU() + ", Prénom: " + utilisateur.getPrenomU());
                 return utilisateur;
             } else {
                 System.out.println("Aucun utilisateur trouvé avec l'ID : " + id);
